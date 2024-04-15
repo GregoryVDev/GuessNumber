@@ -19,13 +19,17 @@
 
 let minimum = 1; // Lower Number
 let maximum = 100; // High Number
-const numberRandom = Math.floor(Math.random() * (maximum - minimum)) + minimum; // Put the random number
+const randomNumber = Math.floor(Math.random() * (maximum - minimum)) + minimum; // Put the random number
 let numberTurns = 1; // Number of turns
 let numberOfTrials = 10; // Trials number
 let smallNumber = "Votre nombre choisi est trop petit";
 let largeNumber = "Votre nombre choisi est trop grand";
 let oneChance = "Attention !";
 let userGuess = parseInt(guessField).value;
+const containerButton = document.getElementById("container-button");
+const button = document.getElementById("container-button button");
+
+// This function is called when the user submits a guess in a form field.
 
 function guessField(numberOfTrials) {
   let numberChoise = document.getElementById("debug").value;
@@ -33,18 +37,31 @@ function guessField(numberOfTrials) {
   turn(numberChoise);
 }
 
+// Function that returns the figures and tells you whether you've won or lost
+
 function turn(numberChoise) {
   if (numberOfTrials > 0) {
     numberOfTrials--;
-    if (numberChoise > numberRandom) {
+    if (numberChoise > randomNumber) {
       console.log(`${largeNumber} il vous reste ${numberOfTrials} essais`);
-    } else if (numberChoise < numberRandom) {
+    } else if (numberChoise < randomNumber) {
       console.log(`${smallNumber} il vous reste ${numberOfTrials} essais`);
     } else {
       console.log("Bravo mon ami tu as trouvé !");
+      endOfGame();
     }
   } else {
     console.log("Tu as malheureusement perdu... Dommage !");
-    finDuJeu();
+    endOfGame();
   }
+  if (numberOfTrials === 0 && numberChoise !== randomNumber) {
+    endOfGame();
+  }
+}
+
+// Function that takes you back to the end of the game
+
+function endOfGame() {
+  console.log("Game Over");
+  containerButton.style.textAlign = "center";
 }

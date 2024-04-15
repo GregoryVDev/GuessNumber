@@ -10,3 +10,15 @@ h1 {
   text-align: center;
   margin-top: 80px;
 }
+
+#container-button {
+  text-align: center;
+  margin-top: 50px;
+}
+
+#container-button button {
+  padding: 10px;
+  text-transform: uppercase;
+  border-radius: 10px;
+  /* display: none; */
+}
