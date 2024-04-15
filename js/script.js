@@ -27,7 +27,7 @@ let largeNumber = "Votre nombre choisi est trop grand";
 let oneChance = "Attention !";
 let userGuess = parseInt(guessField).value;
 const containerButton = document.getElementById("container-button");
-const button = document.getElementById("container-button button");
+const button = document.querySelector("#container-button button");
 
 // This function is called when the user submits a guess in a form field.
 
@@ -64,4 +64,5 @@ function turn(numberChoise) {
 function endOfGame() {
   console.log("Game Over");
   containerButton.style.textAlign = "center";
+  button.style.display = "block";
 }
