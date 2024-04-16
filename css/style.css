@@ -6,9 +6,18 @@ h1 {
   text-align: center;
 }
 
+#trials {
+  text-align: center;
+  margin-top: 50px;
+}
+
 .container-form {
   text-align: center;
   margin-top: 80px;
+}
+
+#valide {
+  display: none;
 }
 
 #container-button {
