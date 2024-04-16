@@ -11,15 +11,13 @@
 <body>
     <h1>Guess the number</h1>
 
-    <!-- <p class="guesses"></p>
-    <p class="lastResult"></p>
-    <p class="lowOrHi"></p> -->
-
     <div class="container-form">
         <label for="guessField">Enter a guess: </label>
         <input type="text" id="debug" />
-        <input type="submit" value="Submit guess" onClick="guessField()" />
+        <input type="submit" value="Submit guess" id="valide" onClick="guessField()" />
     </div>
+    <div id="propositions"></div>
+
     <div id="container-button">
         <button>Rejouer</button>
     </div>

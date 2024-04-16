@@ -22,47 +22,88 @@ let maximum = 100; // High Number
 const randomNumber = Math.floor(Math.random() * (maximum - minimum)) + minimum; // Put the random number
 let numberTurns = 1; // Number of turns
 let numberOfTrials = 10; // Trials number
+let guessedNumbers = []; // Array for stock the number
+const proposedNumber = document.getElementById("propositions");
 let smallNumber = "Votre nombre choisi est trop petit";
 let largeNumber = "Votre nombre choisi est trop grand";
 let oneChance = "Attention !";
 let userGuess = parseInt(guessField).value;
+const valide = document.getElementById("valide");
 const containerButton = document.getElementById("container-button");
 const button = document.querySelector("#container-button button");
+
+debug.focus(); // Automatically selects the input
+debug.addEventListener("keypress", function (e) {
+  // An event that lets you press enter to skip the turn
+  if (e.key === "Enter") {
+    guessField();
+    debug.value = ""; // Refresh the input
+  }
+});
 
 // This function is called when the user submits a guess in a form field.
 
 function guessField(numberOfTrials) {
-  let numberChoise = document.getElementById("debug").value;
+  let numberChoice = document.getElementById("debug").value;
   // document.getElementById("guessField").innerHTML = numberChoise;
-  turn(numberChoise);
+  turn(numberChoice);
 }
 
 // Function that returns the figures and tells you whether you've won or lost
 
-function turn(numberChoise) {
+function turn(numberChoice) {
   if (numberOfTrials > 0) {
     numberOfTrials--;
-    if (numberChoise > randomNumber) {
-      console.log(`${largeNumber} il vous reste ${numberOfTrials} essais`);
-    } else if (numberChoise < randomNumber) {
-      console.log(`${smallNumber} il vous reste ${numberOfTrials} essais`);
+    if (numberChoice > randomNumber) {
+      console.log(
+        `${numberChoice} ${largeNumber} il vous reste ${numberOfTrials} essais`
+      );
+    } else if (numberChoice < randomNumber) {
+      console.log(
+        `${numberChoice} ${smallNumber} il vous reste ${numberOfTrials} essais`
+      );
     } else {
       console.log("Bravo mon ami tu as trouvé !");
       endOfGame();
     }
   } else {
-    console.log("Tu as malheureusement perdu... Dommage !");
+    console.log("Tu as perdu... Dommage !");
     endOfGame();
   }
-  if (numberOfTrials === 0 && numberChoise !== randomNumber) {
+  if (numberOfTrials === 0 && numberChoice !== randomNumber) {
     endOfGame();
+  }
+  // Check whether there's only one chance left
+
+  if (numberOfTrials == 1) {
+    console.log(`${oneChance} il ne te reste plus qu'${numberOfTrials} essai`);
   }
 }
 
-// Function that takes you back to the end of the game
+// Function for create the <p>
+
+function createPara(smallNumber, largeNumber, numberChoice) {
+  let para = document.createElement("p");
+  let resultText = numberChoice + " " + smallNumber + " " + largeNumber;
+  document.getElementById("propositions").appendChild(para); // Add the <p> in the #propositions
+}
+
+// Function end the game
 
 function endOfGame() {
-  console.log("Game Over");
   containerButton.style.textAlign = "center";
   button.style.display = "block";
+  valide.style.display = "none";
 }
+
+// Function restart the game
+
+function Replay() {
+  // Rechargez simplement la page pour recommencer une nouvelle partie
+  window.location.reload();
+}
+
+// Ajoutez le gestionnaire d'événements au bouton "Rejouer"
+document
+  .querySelector("#container-button button")
+  .addEventListener("click", Replay);
