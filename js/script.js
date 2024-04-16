@@ -64,14 +64,16 @@ function createPara(response, numberChoice) {
   let para = document.createElement("p");
   para.textContent = response;
   document.getElementById("propositions").appendChild(para); // Add the <p> in the #propositions
+  para.style.fontWeight = "600";
 }
 
 // Function end the game
 
 function endOfGame() {
+  let labelForm = document.getElementById("labelform");
   containerButton.style.textAlign = "center";
   button.style.display = "block";
-  valide.style.display = "none";
+  debug.style.display = "none";
 }
 
 // Function restart the game
